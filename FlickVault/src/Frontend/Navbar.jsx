@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Search } from "lucide-react";
+import { Search, Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [input, setInput] = useState("");
   const [isVisible, setIsVisible] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSearch = (e) => {
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       console.log("Searched for: ", input);
       setInput("");
       setIsVisible(false);
     }
-  };
-
-  const displayBox = () => {
-    setIsVisible((prev) => !prev);
   };
 
   return (
@@ -67,28 +64,55 @@ const Navbar = () => {
           <Search
             color="white"
             className="cursor-pointer"
-            onClick={displayBox}
+            onClick={() => setIsVisible((prev) => !prev)}
           />
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleSearch}
-            placeholder="Search for a movie..."
+            placeholder="Search movie..."
             className={`outline-none text-white mx-2 bg-transparent transition-all duration-500 ease-in-out ${
-              isVisible ? "w-40 opacity-100" : "w-0 opacity-0"
+              isVisible ? "w-[80%] opacity-100" : "w-0 opacity-0"
             }`}
           />
         </div>
         <div className="hidden md:block bg-cyan-300 px-4 py-2 mx-3 lg:mx-5 rounded-[10%] hover:bg-cyan-500">
           <NavLink to="/login">Login</NavLink>
         </div>
-        <div className="md:hidden bottom-1 relative">
-          <a className="text-4xl text-white mx-3" href="#">
-            &#8801;
-          </a>
+        <div className="md:hidden px-1.5 relative mx-4">
+          <Menu
+            color="white"
+            className="cursor-pointer"
+            onClick={() => setIsOpen((prev) => !prev)}
+          />
         </div>
       </div>
+      {isOpen && (
+        <div className="md:hidden absolute top-22 left-0 w-full bg-slate-900 text-white text-lg text-center shadow-md">
+          <Link
+            to="/"
+            className="block py-2 hover:bg-gray-700"
+            onClick={() => setIsOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
+            to="/watchlist"
+            className="block py-2 hover:bg-gray-700"
+            onClick={() => setIsOpen(false)}
+          >
+            Watchlist
+          </Link>
+          <Link
+            to="/profile"
+            className="block py-2 hover:bg-gray-700"
+            onClick={() => setIsOpen(false)}
+          >
+            Profile
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

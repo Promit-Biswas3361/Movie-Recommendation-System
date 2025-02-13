@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Heart } from "lucide-react";
+import { Heart, CircleMinus } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const MovieCard = () => {
+const MovieCard = ({ page }) => {
   const [isWatchlisted, setIsWatchlisted] = useState(false);
   return (
     <div className="w-[180px] sm:w-[200px] lg:w-[230px] h-[120px] md:h-[135px] lg:h-[150px] transition-transform duration-300 hover:scale-110 hover:z-10">
@@ -12,15 +12,23 @@ const MovieCard = () => {
           alt="Mission Impossible: Dead Reckoning Part-1"
           className="h-full w-full object-fill"
         />
-        <Heart
-          color={isWatchlisted ? "red" : "white"}
-          className={`absolute bottom-1 right-1 text-4xl z-1 cursor-pointer ${
-            isWatchlisted && "fill-red-500"
-          }`}
-          onClick={() => setIsWatchlisted((prev) => !prev)}
-        />
+        {page?.toLowerCase() == "home" ? (
+          <Heart
+            color={isWatchlisted ? "red" : "white"}
+            className={`absolute bottom-1 right-1 text-4xl z-1 cursor-pointer hover:fill-red-500 ${
+              isWatchlisted && "fill-red-500"
+            }`}
+            onClick={() => setIsWatchlisted((prev) => !prev)}
+          />
+        ) : (
+          <CircleMinus
+            color="white"
+            className="absolute top-1 right-1 text-4xl z-1 cursor-pointer hover:fill-red-500"
+            onClick={() => setIsWatchlisted(false)}
+          />
+        )}
       </div>
-      <div className="text-white text-center">
+      <div className="text-white text-center text-sm md:text-base">
         <Link to="">Mission Impossible</Link>
       </div>
     </div>
