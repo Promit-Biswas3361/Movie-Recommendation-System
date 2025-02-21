@@ -1,0 +1,26 @@
+@media (hover: none) {
+  .touch-padding {
+    padding: 0px 15px;
+    padding-top: 2px;
+  }
+
+  .inputFile {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+@media (hover: hover) {
+  .touch-padding:hover .inputFile {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .inputFile {
+    display: none;
+  }
+
+  .inputFile:hover {
+    text-decoration: underline;
+  }
+}

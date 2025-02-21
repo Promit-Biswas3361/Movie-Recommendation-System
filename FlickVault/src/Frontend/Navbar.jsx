@@ -44,6 +44,17 @@ const Navbar = () => {
           Watchlist
         </NavLink>
         <NavLink
+          to="/favourites"
+          className={({ isActive }) =>
+            [
+              isActive ? "text-cyan-300 font-bold" : "text-white",
+              "text-lg mx-4 lg:mx-5",
+            ].join(" ")
+          }
+        >
+          Favourites
+        </NavLink>
+        <NavLink
           to="/profile"
           className={({ isActive }) =>
             [
@@ -103,6 +114,13 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
           >
             Watchlist
+          </Link>
+          <Link
+            to="/favourites"
+            className="block py-2 hover:bg-gray-700"
+            onClick={() => setIsOpen(false)}
+          >
+            Favourites
           </Link>
           <Link
             to="/profile"

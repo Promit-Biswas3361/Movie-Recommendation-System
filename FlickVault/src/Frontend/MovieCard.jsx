@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Heart, CircleMinus } from "lucide-react";
+import { Heart, CircleMinus, Bookmark } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const MovieCard = ({ page }) => {
   const [isWatchlisted, setIsWatchlisted] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   return (
     <div className="w-[180px] sm:w-[200px] lg:w-[230px] h-[120px] md:h-[135px] lg:h-[150px] transition-transform duration-300 hover:scale-110 hover:z-10">
       <div className="relative rounded-md overflow-hidden cursor-pointer">
@@ -13,13 +14,23 @@ const MovieCard = ({ page }) => {
           className="h-full w-full object-fill"
         />
         {page?.toLowerCase() == "home" ? (
-          <Heart
-            color={isWatchlisted ? "red" : "white"}
-            className={`absolute bottom-1 right-1 text-4xl z-1 cursor-pointer hover:fill-red-500 ${
-              isWatchlisted && "fill-red-500"
-            }`}
-            onClick={() => setIsWatchlisted((prev) => !prev)}
-          />
+          <div className="">
+            <Heart
+              color={isLiked ? "red" : "white"}
+              className={`absolute bottom-1 right-8 text-4xl z-1 cursor-pointer hover:fill-red-500 ${
+                isLiked && "fill-red-500"
+              }`}
+              onClick={() => setIsLiked((prev) => !prev)}
+            />
+
+            <Bookmark
+              color={isWatchlisted ? "yellow-500" : "white"}
+              className={`absolute bottom-1 right-1 text-4xl z-1 cursor-pointer hover:fill-yellow-500 ${
+                isWatchlisted && "fill-yellow-500"
+              }`}
+              onClick={() => setIsWatchlisted((prev) => !prev)}
+            />
+          </div>
         ) : (
           <CircleMinus
             color="white"
